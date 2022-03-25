@@ -1,4 +1,5 @@
-﻿using FeedlySharp.Models;
+﻿using System.Threading.Tasks;
+using FeedlySharp.Models;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -13,9 +14,10 @@ namespace FeedlySharp.Services
             this.feedlyOptions = feedlyOptions;
         }
 
-        public void Authenticate(IRestClient client, IRestRequest request)
+        public ValueTask Authenticate(RestClient client, RestRequest request)
         {
             request.AddHeader("Authorization", $"Bearer {feedlyOptions.AccessToken}");
+            return new ValueTask();
         }
 
         public FeedlyOptions Options { get => feedlyOptions; }

@@ -9,7 +9,7 @@ namespace FeedlySharp.Extensions
 {
     public static class FeedlySharpExtensions
     {
-        public static void ThrowIfNotSuccess(this IRestResponse restResponse, ILogger logger, params object[] data)
+        public static void ThrowIfNotSuccess(this RestResponse restResponse, ILogger logger, params object[] data)
         {
             if (restResponse.StatusCode != System.Net.HttpStatusCode.OK)
             {
@@ -32,7 +32,7 @@ namespace FeedlySharp.Extensions
         {
             logger.LogDebug($"[{nameof(FeedlySharpHttpClient)} - {nameof(GetAsync)}]: Calling {url}");
 
-            var request = new RestRequest(url, DataFormat.Json);
+            var request = new RestRequest(url, Method.Get);
             var response = await client.ExecuteGetAsync<T>(request);
 
             response.ThrowIfNotSuccess(logger, url);
@@ -44,7 +44,7 @@ namespace FeedlySharp.Extensions
         {
             logger.LogDebug($"[{nameof(FeedlySharpHttpClient)} - {nameof(PostAsync)}]: Calling {url}");
 
-            var request = new RestRequest(url, DataFormat.Json);
+            var request = new RestRequest(url, Method.Post);
             
             request.AddJsonBody(data);
 

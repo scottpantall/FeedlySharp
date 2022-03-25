@@ -36,7 +36,6 @@ namespace FeedlySharp
         {
             this.UseNewtonsoftJson(FeedlyContentSerialization.SerializerSettings);
             this.Authenticator = feedlyAuthenticator;
-            this.UserAgent = $"{nameof(FeedlySharpHttpClient)}/{Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}";
             this.logger = FeedlyHttpClientLogging.CreateLogger();
         }
 
